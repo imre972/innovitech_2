@@ -1,0 +1,71 @@
+<div style="text-align:center">
+    <h1>
+        TÁRGYAK OLDAL
+    </h1>
+
+    <!-- Start TableMaterial -->
+    <div class="subject">
+
+        <!-- New part: this is the search box -->
+        <mat-form-field class="searcher" (keyup.enter)="update()">
+            <input matInput placeholder="Keresés a tárgyakban" #input>
+        </mat-form-field>
+
+        <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <mat-table class="subjects-table mat-elevation-z8" [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc" matSortDisableClear>
+
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+                <mat-cell *matCellDef="let subject">{{subject.id}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="subjectName">
+                <mat-header-cell *matHeaderCellDef>Tárgy neve</mat-header-cell>
+                <mat-cell class="name-cell" *matCellDef="let subject">{{subject.subjectName}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="subjectLength">
+                <mat-header-cell *matHeaderCellDef>Tárgy hossza (m)</mat-header-cell>
+                <mat-cell class="length-cell" *matCellDef="let subject">{{subject.subjectLength}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="subjectCreationDate">
+                <mat-header-cell *matHeaderCellDef>Létrehozás dátuma</mat-header-cell>
+                <mat-cell class="creation-cell" *matCellDef="let subject">{{subject.subjectCreationDate}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="subjectButton">
+                <mat-header-cell *matHeaderCellDef>GOMBOSZLOP_JÖNNE</mat-header-cell>
+                <mat-cell class="button-cell" *matCellDef="let subject">{{subject.subjectButton}}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="displayContextMenu($event, row)" (blur)="update()"></mat-row>
+
+        </mat-table>
+
+        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15]" (page)="pageEvent = $event" aria-label="Select page"></mat-paginator>
+        <div *ngIf="pageEvent">
+            <h2>Oldal események</h2>
+            <div>Összes elem: {{pageEvent.length}}</div>
+            <div>Oldal méret: {{pageEvent.pageSize}}</div>
+            <div>Oldal szám: {{pageEvent.pageIndex + 1}}</div>
+        </div>
+        <app-context-menu *ngIf="leftClickMenuItems.length > 0 && isDisplayContextMenu" [ngStyle]="getLeftClickMenuStyle()" [contextMenuItems]="leftClickMenuItems" (onContextMenuItemClick)="handleMenuItemClick($event)"></app-context-menu>
+    </div>
+    <!-- Stop TableMaterial -->
+    <p>
+        <button mat-raised-button (click)="createSubject() ">
+            Tárgy létrehozása
+        </button>
+    </p>
+    <p>
+        <button mat-raised-button (click)="logout() ">
+            Kilépés
+        </button>
+    </p>
+</div>

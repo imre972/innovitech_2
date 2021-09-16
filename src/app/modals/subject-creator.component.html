@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Tárgy</h1>
+<div mat-dialog-content>
+    <p>Mi a tárgy neve?</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Tárgy neve:</mat-label>
+        <input matInput [(ngModel)]="data.subjectName">
+    </mat-form-field>
+    <p>Milyen hosszú?</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Tárgy hossza:</mat-label>
+        <input matInput [(ngModel)]="data.subjectLength">
+    </mat-form-field>
+    <p>Milyen széles?</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Tárgy szélessége:</mat-label>
+        <input matInput [(ngModel)]="data.subjectWidth">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Mégse</button>
+    <button mat-button (click)="onSaveClick(data.id, data.subjectName, data.subjectLength, data.subjectWidth)" cdkFocusInitial>Mentés</button>
+</div>
