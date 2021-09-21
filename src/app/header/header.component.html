@@ -1,7 +1,12 @@
 <div style="text-align:right">
     <div>
-        <p>{{userState}}</p>
+        <p>Név: {{userState}}</p>
     </div>
+    <p *ngIf="this.auth">
+        <button mat-raised-button (click)="goAuth()">
+            BEJELENTKEZÉS
+        </button>
+    </p>
     <p>
         <button mat-raised-button (click)="goSubjects() ">
             TÁRGYAK

@@ -29,6 +29,6 @@ export class AuthService {
 		this.userSubject.next(false);
 	}
 	getAuthorizationToken() {
-		return localStorage.getItem('ACCESS_TOKEN');
+		return 'some-auth-token';
 	}
 }

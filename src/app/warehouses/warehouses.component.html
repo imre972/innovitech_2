@@ -1,10 +1,10 @@
 <div style="text-align:center">
     <h1>
-        Welcome Warehouses!
+        RAKTÁRAK OLDAL
     </h1>
-    <p>
+    <p *ngIf="this.auth">
         <button mat-raised-button (click)="logout()">
-      Logout
+      Kilépés
     </button>
     </p>
 </div>

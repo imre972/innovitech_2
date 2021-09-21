@@ -3,17 +3,17 @@
     <p>Mi a tárgy neve?</p>
     <mat-form-field appearance="fill">
         <mat-label>Tárgy neve:</mat-label>
-        <input matInput [(ngModel)]="data.subjectName">
+        <input matInput [(ngModel)]="data.subjectName" (blur)="update()" (keyup.enter)="update()">
     </mat-form-field>
     <p>Milyen hosszú?</p>
     <mat-form-field appearance="fill">
         <mat-label>Tárgy hossza:</mat-label>
-        <input matInput [(ngModel)]="data.subjectLength">
+        <input matInput [(ngModel)]="data.subjectLength" (blur)="update()" (keyup.enter)="update()">
     </mat-form-field>
     <p>Milyen széles?</p>
     <mat-form-field appearance="fill">
         <mat-label>Tárgy szélessége:</mat-label>
-        <input matInput [(ngModel)]="data.subjectWidth">
+        <input matInput [(ngModel)]="data.subjectWidth" (blur)="update()" (keyup.enter)="update()">
     </mat-form-field>
 </div>
 <div mat-dialog-actions>

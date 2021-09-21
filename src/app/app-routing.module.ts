@@ -11,18 +11,19 @@ import {SubjectResolver} from './services/subject.resolver';
 
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'auth'},
-  {path: 'auth', component: AuthComponent},
+  {path: '', pathMatch: 'full', redirectTo: 'subjects/:id'},
+  {
+    path: 'auth',
+    component: AuthComponent,
+    canActivate: [AuthGuard]},
   {
     path: 'subjects/:id',
     component: SubjectsComponent,
-    resolve: {subject: SubjectResolver},
-    canActivate: [AuthGuard]
+    resolve: {subject: SubjectResolver}
   },
   {
     path: 'warehouses',
-    component: WarehousesComponent,
-    canActivate: [AuthGuard]
+    component: WarehousesComponent
   },
   {
     path: "**",

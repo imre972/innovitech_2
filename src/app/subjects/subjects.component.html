@@ -7,7 +7,7 @@
     <div class="subject">
 
         <!-- New part: this is the search box -->
-        <mat-form-field class="searcher" (keyup.enter)="update()">
+        <mat-form-field class="searcher">
             <input matInput placeholder="Keresés a tárgyakban" #input>
         </mat-form-field>
 
@@ -34,7 +34,7 @@
 
             <ng-container matColumnDef="subjectCreationDate">
                 <mat-header-cell *matHeaderCellDef>Létrehozás dátuma</mat-header-cell>
-                <mat-cell class="creation-cell" *matCellDef="let subject">{{subject.subjectCreationDate}}</mat-cell>
+                <mat-cell class="creation-cell" *matCellDef="let subject">{{subject.subjectCreationDate | date: 'dd/MM/yyyy, h:mm a'}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="subjectButton">
@@ -44,26 +44,26 @@
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
-            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="displayContextMenu($event, row)" (blur)="update()"></mat-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="displayContextMenu($event, row)"></mat-row>
 
         </mat-table>
 
         <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15]" (page)="pageEvent = $event" aria-label="Select page"></mat-paginator>
-        <div *ngIf="pageEvent">
+        <div *ngIf="pageEvent && this.auth">
             <h2>Oldal események</h2>
             <div>Összes elem: {{pageEvent.length}}</div>
             <div>Oldal méret: {{pageEvent.pageSize}}</div>
             <div>Oldal szám: {{pageEvent.pageIndex + 1}}</div>
         </div>
-        <app-context-menu *ngIf="leftClickMenuItems.length > 0 && isDisplayContextMenu" [ngStyle]="getLeftClickMenuStyle()" [contextMenuItems]="leftClickMenuItems" (onContextMenuItemClick)="handleMenuItemClick($event)"></app-context-menu>
+        <app-context-menu *ngIf=" leftClickMenuItems.length> 0 && isDisplayContextMenu" [ngStyle]="getLeftClickMenuStyle()" [contextMenuItems]="leftClickMenuItems" (onContextMenuItemClick)="handleMenuItemClick($event)"></app-context-menu>
     </div>
     <!-- Stop TableMaterial -->
-    <p>
-        <button mat-raised-button (click)="createSubject() ">
+    <p *ngIf="this.auth">
+        <button mat-raised-button (click)=" createSubject() ">
             Tárgy létrehozása
         </button>
     </p>
-    <p>
+    <p *ngIf="this.auth">
         <button mat-raised-button (click)="logout() ">
             Kilépés
         </button>

@@ -3,6 +3,7 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import {Subject} from '../models/subject.model';
 import {SubjectsService} from '../services/subjects.service';
+import {AuthService} from '../services/auth.service';
 
 @Component({
 	selector: 'subject-creator',
@@ -16,6 +17,7 @@ export class SubjectCreatorDialog {
 	subjects: Subject[] = [];
 
 	constructor(private subjectService: SubjectsService,
+		private authService: AuthService,
 		public dialogRef: MatDialogRef<SubjectCreatorDialog>,
 		@Inject(MAT_DIALOG_DATA) public data: Subject) {}
 
@@ -26,29 +28,42 @@ export class SubjectCreatorDialog {
 	onSaveClick(id: number,
 		subjectName: string,
 		subjectLength: number,
-		subjectWidth: number,): void {
-		if (id !== 0) {
-			console.log('létezik id, ezaz: ', id);
-			// this.edit(id, subjectName, subjectLength, subjectWidth, new Date());
-			this.dialogRef.close();
-		} else {
-			this.add(subjectName, subjectLength, subjectWidth, new Date());
-			this.dialogRef.close();
+		subjectWidth: number): void {
+		if (this.authService.userValue) {
+			if (id !== 0) {
+				this.edit(id, subjectName, subjectLength, subjectWidth, new Date());
+				this.dialogRef.close();
+			} else {
+				this.add(subjectName, subjectLength, subjectWidth, new Date());
+				this.dialogRef.close();
+			}
 		}
 	}
 
-	// edit(id: number,
-	// 	subjectName: string,
-	// 	subjectLength: number,
-	// 	subjectWidth: number,
-	// 	subjectCreationDate: Date) {
-	// 	let subjectButton = 'GOMB HELYETT NYOMHATÓ A SOR';
+	edit(id: number,
+		subjectName: string,
+		subjectLength: number,
+		subjectWidth: number,
+		subjectCreationDate: Date) {
+		let subjectButton = 'GOMB HELYETT NYOMHATÓ A SOR';
+		this.subject = {id, subjectName, subjectLength, subjectWidth, subjectCreationDate, subjectButton} as Subject;
+		this.update();
+	}
 
-	// }
-
-	// edit(subject: Subject) {
-	// 	this.subject = subject;
-	// }
+	update() {
+		if (this.subject) {
+			this.subjectService
+				.updateSubject(this.subject)
+				.subscribe(subject => {
+					// replace the subject in the subjects list with update from server
+					const ix = subject ? this.subjects.findIndex(h => h.id === subject.id) : -1;
+					if (ix > -1) {
+						this.subjects[ix] = subject;
+					}
+				});
+			this.subject = undefined;
+		}
+	}
 
 	add(subjectName: string,
 		subjectLength: number,

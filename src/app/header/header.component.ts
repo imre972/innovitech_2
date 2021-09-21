@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {User} from '../user';
 import {AuthService} from '../services/auth.service';
 
 @Component({
@@ -12,12 +11,27 @@ import {AuthService} from '../services/auth.service';
 export class HeaderComponent implements OnInit {
 
   userState: String;
+  auth: boolean;
 
   constructor(private router: Router, authServ: AuthService) {
-    authServ.user.subscribe(userVal => userVal ? this.userState = 'ADMIN' : this.userState = 'USER');
+    // authServ.user.subscribe(userVal => userVal ? this.userState = 'ADMIN' : this.userState = 'USER');
+    // this.auth = !authServ.userValue;
+    authServ.user.subscribe(userVal => {
+      if (userVal) {
+        this.userState = 'ADMIN ADRIÁN';
+        this.auth = false;
+      } else {
+        this.userState = 'USER UBUL';
+        this.auth = true;
+      }
+    });
   }
 
   ngOnInit(): void {
+  }
+
+  goAuth() {
+    this.router.navigateByUrl('/auth');
   }
 
   goSubjects() {

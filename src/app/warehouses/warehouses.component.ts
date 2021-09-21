@@ -9,14 +9,18 @@ import {AuthService} from '../services/auth.service';
 })
 export class WarehousesComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  auth: boolean;
+
+  constructor(private authService: AuthService, private router: Router) {
+    authService.user.subscribe(userVal => userVal ? this.auth = true : this.auth = false);
+  }
 
   ngOnInit(): void {
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigateByUrl('/auth');
+    this.router.navigateByUrl('/warehouses');
   }
 
 }

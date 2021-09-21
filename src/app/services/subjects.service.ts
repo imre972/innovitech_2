@@ -5,15 +5,15 @@ import {
 	HttpHeaders,
 	HttpParams
 } from '@angular/common/http';
+import {catchError, map, tap} from 'rxjs/operators';
 
 import {Subject} from '../models/subject.model';
 import {HttpErrorHandler, HandleError} from '../http-error-handler.service';
-import {catchError, map, tap} from 'rxjs/operators';
 
 const httpOptions = {
 	headers: new HttpHeaders({
 		'Content-Type': 'application/json',
-		Authorization: 'Password_72'
+		Authorization: 'my-auth-token'
 	})
 };
 
@@ -49,19 +49,10 @@ export class SubjectsService {
 				params: new HttpParams().set('subjectName', filter),
 				headers: new HttpHeaders({
 					'Content-Type': 'application/json',
-					Authorization: 'Password_72'
+					Authorization: 'my-auth-token'
 				})
 			} : httpOptions;
 
-		if (filter) {
-			return this.http.get<Subject[]>(this.subjectsUrl, options)
-				.pipe(
-					tap(res => {
-						this.subjectsAllLength = res.length;
-						this.arrayLengthSubject.next(this.subjectsAllLength);
-					}),
-					catchError(this.handleError<Subject[]>('searchSubjects', [])));
-		} else {
 			return this.http.get<Subject[]>(this.subjectsUrl, options)
 				.pipe(
 					tap(res => {
@@ -69,10 +60,13 @@ export class SubjectsService {
 						this.arrayLengthSubject.next(this.subjectsAllLength);
 					}),
 					map(subjects => subjects.
-						filter(subject => itemNumber * pageIndex < subject.id).
-						filter(subject => subject.id <= itemNumber * (pageIndex + 1))),
-					catchError(this.handleError<Subject[]>('searchSubjects', [])));
-		}
+						filter((subject, index, arr) => {
+							return (itemNumber * pageIndex) < index + 1 ? arr[index] : null;
+						}).
+						filter((subject, index, arr) => {
+							return (index < itemNumber) ? arr[index] : null;
+						}),
+					catchError(this.handleError<Subject[]>('searchSubjects', []))));
 	}
 
 	//////// Save methods //////////
@@ -82,12 +76,22 @@ export class SubjectsService {
 		return this.http.post<Subject>(this.subjectsUrl, subject, httpOptions)
 			.pipe(
 				catchError(this.handleError('addSubject', subject))
+		);
+	}
+
+	/** DELETE: delete the subject from the server */
+	deleteSubject(id: number): Observable<unknown> {
+		const url = `${this.subjectsUrl}${id}`; // DELETE api/subjects/id
+		return this.http.delete(url, httpOptions)
+			.pipe(
+				catchError(this.handleError('deleteSubject'))
 			);
 	}
 
 	/** PUT: update the subject on the server. Returns the updated subject upon success. */
 	updateSubject(subject: Subject): Observable<Subject> {
-
+		httpOptions.headers =
+			httpOptions.headers.set('Authorization', 'my-new-auth-token');
 		return this.http.put<Subject>(this.subjectsUrl, subject, httpOptions)
 			.pipe(
 				catchError(this.handleError('updateSubject', subject))
