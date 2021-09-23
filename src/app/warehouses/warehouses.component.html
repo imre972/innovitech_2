@@ -2,6 +2,66 @@
     <h1>
         RAKTÁRAK OLDAL
     </h1>
+    <!-- Start TableMaterial -->
+    <div class="warehouse">
+
+        <!-- New part: this is the search box -->
+        <mat-form-field class="searcher">
+            <input matInput placeholder="Keresés a raktárakban" #input>
+        </mat-form-field>
+
+        <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <mat-table class="warehouses-table mat-elevation-z8" [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc" matSortDisableClear>
+
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+                <mat-cell *matCellDef="let warehouse">{{warehouse.id}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="warehouseAddress">
+                <mat-header-cell *matHeaderCellDef>Raktár címe</mat-header-cell>
+                <mat-cell class="name-cell" *matCellDef="let warehouse">{{warehouse.warehouseAddress}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="warehouseLength">
+                <mat-header-cell *matHeaderCellDef>Raktár hossza (m)</mat-header-cell>
+                <mat-cell class="length-cell" *matCellDef="let warehouse">{{warehouse.warehouseLength}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="warehouseWidth">
+                <mat-header-cell *matHeaderCellDef>Raktár szélessége (m)</mat-header-cell>
+                <mat-cell class="length-cell" *matCellDef="let warehouse">{{warehouse.warehouseWidth}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="warehouseButton">
+                <mat-header-cell *matHeaderCellDef>GOMBOSZLOP_JÖNNE</mat-header-cell>
+                <mat-cell class="button-cell" *matCellDef="let warehouse">{{warehouse.warehouseButton}}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="displayContextMenu($event, row)"></mat-row>
+
+        </mat-table>
+
+        <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15]" (page)="pageEvent = $event" aria-label="Select page"></mat-paginator>
+        <div *ngIf="pageEvent && this.auth">
+            <h2>Oldal események</h2>
+            <div>Összes elem: {{pageEvent.length}}</div>
+            <div>Oldal méret: {{pageEvent.pageSize}}</div>
+            <div>Oldal szám: {{pageEvent.pageIndex + 1}}</div>
+        </div>
+        <app-context-menu *ngIf=" leftClickMenuItems.length > 0 && isDisplayContextMenu" [ngStyle]="getLeftClickMenuStyle()" [contextMenuItems]="leftClickMenuItems" (onContextMenuItemClick)="handleMenuItemClick($event)"></app-context-menu>
+    </div>
+    <!-- Stop TableMaterial -->
+    <p *ngIf="this.auth">
+        <button mat-raised-button (click)=" createWarehouse() ">
+            Raktár létrehozása
+        </button>
+    </p>
     <p *ngIf="this.auth">
         <button mat-raised-button (click)="logout()">
       Kilépés

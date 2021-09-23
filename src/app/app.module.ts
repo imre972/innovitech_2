@@ -19,6 +19,7 @@ import {MessageService} from './message.service';
 import {MessagesComponent} from './messages/messages.component';
 import {AuthService} from './services/auth.service';
 import {SubjectsService} from './services/subjects.service';
+import {WarehousesService} from './services/warehouse.service';
 
 import {MatSliderModule} from '@angular/material/slider';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -43,9 +44,11 @@ import {AuthComponent} from './auth/auth.component';
 
 import {httpInterceptorProviders} from './http-interceptors/index';
 import {SubjectResolver} from "./services/subject.resolver";
+import {WarehouseResolver} from "./services/warehouse.resolver";
 
 import {ContextMenuComponent} from './modals/context-menu.component';
 import {SubjectCreatorDialog} from './modals/subject-creator.component';
+import {WarehouseCreatorDialog} from './modals/warehouse-creator.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,8 @@ import {SubjectCreatorDialog} from './modals/subject-creator.component';
     AuthComponent,
     MessagesComponent,
     ContextMenuComponent,
-    SubjectCreatorDialog
+    SubjectCreatorDialog,
+    WarehouseCreatorDialog
   ],
   imports: [
     BrowserModule,
@@ -91,7 +95,9 @@ import {SubjectCreatorDialog} from './modals/subject-creator.component';
     MessageService,
     AuthService,
     SubjectsService,
+    WarehousesService,
     SubjectResolver,
+    WarehouseResolver,
     HttpErrorHandler,
     {provide: RequestCache, useClass: RequestCacheWithMap},
     httpInterceptorProviders

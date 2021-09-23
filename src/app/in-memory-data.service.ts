@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {InMemoryDbService} from 'angular-in-memory-web-api';
 import {Subject} from './models/subject.model';
+import {Warehouse} from './models/warehouse.model';
 
 @Injectable({
 	providedIn: 'root',
@@ -113,10 +114,40 @@ export class InMemoryDataService implements InMemoryDbService {
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
 			}
 		];
-		return {subjects};
+
+		const warehouses: Warehouse[] = [
+			{
+				id: 1,
+				warehouseAddress: '1142, Bp. Üllői út 22.',
+				warehouseLength: 1180,
+				warehouseWidth: 350,
+				warehouseButton: 'GOMB HELYETT NYOMHATÓ A SOR'
+			},
+			{
+				id: 2,
+				warehouseAddress: '1135, Bp. Reitter F. utca 14.',
+				warehouseLength: 2220,
+				warehouseWidth: 380,
+				warehouseButton: 'GOMB HELYETT NYOMHATÓ A SOR'
+			},
+			{
+				id: 3,
+				warehouseAddress: '1130, Bp. Kámfor utca 30.',
+				warehouseLength: 2300,
+				warehouseWidth: 330,
+				warehouseButton: 'GOMB HELYETT NYOMHATÓ A SOR'
+			}
+		];
+		return {subjects, warehouses};
 	}
-	genId(subjects: Subject[]): number {
-		return subjects.length > 0 ? Math.max(...subjects.map(subject => subject.id)) + 1 : 1;
+	genId(collection: any[], collectionName: string): number {
+		if (collectionName === 'subjects') {
+			let subjects: Subject[] = collection;
+			return subjects.length > 0 ? Math.max(...subjects.map(subject => subject.id)) + 1 : 1;
+		} else {
+			let warehouses: Warehouse[] = collection;
+			return warehouses.length > 0 ? Math.max(...warehouses.map(warehouse => warehouse.id)) + 1 : 1;
+		}
 	}
 
 }

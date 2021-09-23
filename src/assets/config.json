@@ -1,5 +1,6 @@
 {
     "subjectsUrl": "api/subjects/",
+    "warehousesUrl": "api/warehouses/",
     "textfile": "assets/textfile.txt",
     "date": "2020-01-29"
 }

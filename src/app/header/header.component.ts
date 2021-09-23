@@ -39,6 +39,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goWarehouses() {
-    this.router.navigateByUrl('/warehouses');
+    this.router.navigateByUrl('/warehouses/1');
   }
 }

@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Raktár</h1>
+<div mat-dialog-content>
+    <p>Mi a raktár címe?</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Raktár címe:</mat-label>
+        <input matInput [(ngModel)]="data.warehouseAddress" (blur)="update()" (keyup.enter)="update()">
+    </mat-form-field>
+    <p>Milyen hosszú?</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Raktár hossza:</mat-label>
+        <input matInput [(ngModel)]="data.warehouseLength" (blur)="update()" (keyup.enter)="update()">
+    </mat-form-field>
+    <p>Milyen széles?</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Raktár szélessége:</mat-label>
+        <input matInput [(ngModel)]="data.warehouseWidth" (blur)="update()" (keyup.enter)="update()">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Mégse</button>
+    <button mat-button (click)="onSaveClick(data.id, data.warehouseAddress, data.warehouseLength, data.warehouseWidth)" cdkFocusInitial>Mentés</button>
+</div>

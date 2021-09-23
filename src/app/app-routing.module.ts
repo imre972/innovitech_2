@@ -8,6 +8,7 @@ import {AuthComponent} from './auth/auth.component';
 import {SubjectsComponent} from './subjects/subjects.component';
 import {WarehousesComponent} from './warehouses/warehouses.component';
 import {SubjectResolver} from './services/subject.resolver';
+import {WarehouseResolver} from './services/warehouse.resolver';
 
 
 const routes: Routes = [
@@ -22,8 +23,9 @@ const routes: Routes = [
     resolve: {subject: SubjectResolver}
   },
   {
-    path: 'warehouses',
-    component: WarehousesComponent
+    path: 'warehouses/:id',
+    component: WarehousesComponent,
+    resolve: {warehouse: WarehouseResolver}
   },
   {
     path: "**",
