@@ -9,10 +9,12 @@ import {SubjectsComponent} from './subjects/subjects.component';
 import {WarehousesComponent} from './warehouses/warehouses.component';
 import {SubjectResolver} from './services/subject.resolver';
 import {WarehouseResolver} from './services/warehouse.resolver';
+import {PageNotFoundComponent} from './page-not-found.component';
 
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'subjects/:id'},
+  // {path: '**', component: PageNotFoundComponent},
   {
     path: 'auth',
     component: AuthComponent,
@@ -26,10 +28,6 @@ const routes: Routes = [
     path: 'warehouses/:id',
     component: WarehousesComponent,
     resolve: {warehouse: WarehouseResolver}
-  },
-  {
-    path: "**",
-    redirectTo: '/'
   }
 ];
 
