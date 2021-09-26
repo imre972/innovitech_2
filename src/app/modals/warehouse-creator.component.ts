@@ -1,7 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {Warehouse} from '../models/warehouse.model';
+import {ValueMeter} from '../models/value-meter.model';
 import {WarehousesService} from '../services/warehouse.service';
 import {AuthService} from '../services/auth.service';
 
@@ -16,10 +18,24 @@ export class WarehouseCreatorDialog {
 	warehouse: Warehouse | undefined; // the warehouse currently being edited
 	warehouses: Warehouse[] = [];
 
-	constructor(private warehouseService: WarehousesService,
+	selectedValue: number;
+	selectedMeter: number;
+
+	valueMeters: ValueMeter[] = [
+		{value: 1, viewValue: 1},
+		{value: 2, viewValue: 2},
+		{value: 3, viewValue: 3},
+		{value: 4, viewValue: 4},
+		{value: 5, viewValue: 5}
+	];
+
+	constructor(
+		private _snackBar: MatSnackBar,
+		private warehouseService: WarehousesService,
 		private authService: AuthService,
 		public dialogRef: MatDialogRef<WarehouseCreatorDialog>,
-		@Inject(MAT_DIALOG_DATA) public data: Warehouse) {}
+		@Inject(MAT_DIALOG_DATA) public data: Warehouse
+	) {}
 
 	onCancelClick(): void {
 		this.dialogRef.close();
@@ -38,6 +54,7 @@ export class WarehouseCreatorDialog {
 				this.dialogRef.close();
 			}
 		}
+		this.openSnackBar('Sikeres mentés!', 'Bezár');
 	}
 
 	edit(id: number,
@@ -78,6 +95,12 @@ export class WarehouseCreatorDialog {
 		this.warehouseService
 			.addWarehouse(newWarehouse)
 			.subscribe(warehouse => this.warehouses.push(warehouse));
+	}
+
+	openSnackBar(message: string, action: string) {
+		this._snackBar.open(message, action, {
+			duration: 3000
+		});
 	}
 
 }

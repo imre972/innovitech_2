@@ -1,61 +1,75 @@
-button {
-    background: rgb(1, 29, 51);
-    border-color: transparent;
-    color: #fff;
-    cursor: pointer;
-}
-
-.error {
-    color: #b30000;
-}
-
-.warehouse {
-    text-align: center;
-    max-width: 990px;
-    margin: 0 auto;
-}
-
-.searcher {
-    background: rgb(124, 104, 67);
-}
-
-.name-cell {
-    text-align: left;
-    margin: 10px auto;
-}
-
-.length-cell {
-    text-align: center;
-}
-
-.duration-cell mat-icon {
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 20px;
-}
-
-.creation-cell {
-    text-align: center;
-}
-
-.spinner-container {
-    height: 360px;
-    width: 390px;
-    position: fixed;
-}
-
-.warehouses-table {
-    min-height: 360px;
-    margin-top: 10px;
-}
-
-.spinner-container mat-spinner {
-    margin: 130px auto 0 auto;
-}
-
-app-context-menu {
-    width: 100px;
-    background: #2d2d2d;
-    color: #fff;
-    padding: 15px;
-}
+    button {
+        background: rgb(1, 29, 51);
+        border-color: transparent;
+        color: #fff;
+        cursor: pointer;
+    }
+    
+    .error {
+        color: #b30000;
+    }
+    
+    .warehouse {
+        text-align: center;
+        max-width: 990px;
+        margin: 0 auto;
+    }
+    
+    .searcher {
+        background: rgb(124, 104, 67);
+    }
+    
+    .name-cell {
+        text-align: left;
+        margin: 10px auto;
+    }
+    
+    .length-cell {
+        text-align: center;
+    }
+    
+    .duration-cell mat-icon {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 20px;
+    }
+    
+    .creation-cell {
+        text-align: center;
+    }
+    
+    .spinner-container {
+        height: 360px;
+        width: 390px;
+        position: fixed;
+    }
+    
+    .warehouses-table {
+        min-height: 360px;
+        margin-top: 10px;
+    }
+    
+    .spinner-container mat-spinner {
+        margin: 130px auto 0 auto;
+    }
+    
+    app-context-menu {
+        width: 100px;
+        background: #2d2d2d;
+        color: #fff;
+        padding: 15px;
+    }
+    
+    #myDIV {
+        align-content: center;
+        width: 70px;
+        background: red;
+    }
+    
+    .center {
+        text-align: center;
+        color: black;
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+    }

@@ -24,6 +24,8 @@ export class SubjectsService {
 	public arrLength: Observable<number>;
 
 	public subjectsAllLength: number;
+	public sumSubjectsLength: number;
+	public sumSubjectsWidth: number;
 	subjectsUrl = 'api/subjects/';
 	private handleError: HandleError;
 
@@ -58,6 +60,10 @@ export class SubjectsService {
 					tap(res => {
 						this.subjectsAllLength = res.length;
 						this.arrayLengthSubject.next(this.subjectsAllLength);
+						this.sumSubjectsLength = res.filter(subject => subject.subjectLength).
+							reduce((sum, current) => sum + current.subjectLength, 0);
+						this.sumSubjectsWidth = res.filter(subject => subject.subjectWidth).
+							reduce((sum, current) => sum + current.subjectWidth, 0);
 					}),
 					map(subjects => subjects.
 						filter((subject, index, arr) => {

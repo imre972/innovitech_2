@@ -57,6 +57,7 @@
         <app-context-menu *ngIf=" leftClickMenuItems.length > 0 && isDisplayContextMenu" [ngStyle]="getLeftClickMenuStyle()" [contextMenuItems]="leftClickMenuItems" (onContextMenuItemClick)="handleMenuItemClick($event)"></app-context-menu>
     </div>
     <!-- Stop TableMaterial -->
+    <div id="myDIV" [ngStyle]="indicator==='BEFÉR' ? {'background-color':'green'} : {'background-color': 'red'}" class="center">{{indicator}}</div>
     <p *ngIf="this.auth">
         <button mat-raised-button (click)=" createWarehouse() ">
             Raktár létrehozása

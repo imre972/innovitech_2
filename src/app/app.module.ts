@@ -29,6 +29,7 @@ import {
 } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
@@ -84,6 +85,7 @@ import {WarehouseCreatorDialog} from './modals/warehouse-creator.component';
     MatInputModule,
     MatTableModule,
     MatDialogModule,
+    MatSnackBarModule,
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,

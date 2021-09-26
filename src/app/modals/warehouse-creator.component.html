@@ -7,13 +7,23 @@
     </mat-form-field>
     <p>Milyen hosszú?</p>
     <mat-form-field appearance="fill">
-        <mat-label>Raktár hossza:</mat-label>
-        <input matInput [(ngModel)]="data.warehouseLength" (blur)="update()" (keyup.enter)="update()">
+        <mat-label>Raktár hossza (m):</mat-label>
+        <select matNativeControl [(ngModel)]="data.warehouseLength" name="valueMeter" (blur)="update()" (keyup.enter)="update()">
+            <option value="selectedMeter" selected></option>
+            <option *ngFor="let valueMeter of valueMeters" [value]="valueMeter.value">
+            {{valueMeter.viewValue}}
+            </option>
+            </select>
     </mat-form-field>
     <p>Milyen széles?</p>
     <mat-form-field appearance="fill">
-        <mat-label>Raktár szélessége:</mat-label>
-        <input matInput [(ngModel)]="data.warehouseWidth" (blur)="update()" (keyup.enter)="update()">
+        <mat-label>Raktár szélessége (m):</mat-label>
+        <select matNativeControl [(ngModel)]="data.warehouseWidth" name="valueMeter" (blur)="update()" (keyup.enter)="update()">
+            <option value="selectedMeter" selected></option>
+            <option *ngFor="let valueMeter of valueMeters" [value]="valueMeter.value">
+            {{valueMeter.viewValue}}
+            </option>
+            </select>
     </mat-form-field>
 </div>
 <div mat-dialog-actions>

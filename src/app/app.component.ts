@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,17 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  title = 'Innovitech raktárazó alkalmazás';
+  auth: boolean;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {
+    authService.user.subscribe(userVal => userVal ? this.auth = true : this.auth = false);
+  }
 
   ngOnInit() {
-    this.router.navigateByUrl('/auth');
+    if (this.auth) {
+      this.router.navigateByUrl('/subjects/1');
+    } else {
+      this.router.navigateByUrl('/auth');
+    }
   }
 }

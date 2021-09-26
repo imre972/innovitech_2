@@ -19,6 +19,7 @@ import {MatDialog} from '@angular/material/dialog';
 
 import {AuthService} from '../services/auth.service';
 import {Warehouse} from '../models/warehouse.model';
+import {SubjectsService} from '../services/subjects.service';
 import {WarehousesService} from '../services/warehouse.service';
 import {WarehousesDataSource} from '../datasources/warehouses-data-source';
 import {ContextMenuModel} from '../models/context-menu.model';
@@ -35,6 +36,8 @@ export class WarehousesComponent implements AfterViewInit, OnInit {
   headers: string[] = [];
 
   auth: boolean;
+
+  indicator: string;
 
   warehouse: Warehouse | undefined; // the warehouse currently being edited
   warehouses: Warehouse[] = [];
@@ -115,11 +118,17 @@ export class WarehousesComponent implements AfterViewInit, OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private subjectsService: SubjectsService,
     private warehousesService: WarehousesService,
     private route: ActivatedRoute,
     public dialog: MatDialog) {
     authService.user.subscribe(userVal => userVal ? this.auth = true : this.auth = false);
     warehousesService.arrLength.subscribe(arrLength => this.length = arrLength);
+    if ((subjectsService.sumSubjectsLength < warehousesService.sumWarehousesLength) && (subjectsService.sumSubjectsWidth < warehousesService.sumWarehousesWidth)) {
+      this.indicator = 'BEFÉR';
+    } else {
+      this.indicator = 'NEM FÉR BE';
+    }
   }
 
   ngOnInit() {
@@ -177,7 +186,7 @@ export class WarehousesComponent implements AfterViewInit, OnInit {
       }
     });
 
-    // dialogRef.afterClosed().pipe(
+    // dialogRef_2.afterClosed().pipe(
     //   debounceTime(150),
     //   distinctUntilChanged(),
     //   tap(() => this.loadWarehousesPage())).subscribe();

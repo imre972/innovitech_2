@@ -24,6 +24,8 @@ export class WarehousesService {
 	public arrLength: Observable<number>;
 
 	public warehousesAllLength: number;
+	public sumWarehousesLength: number;
+	public sumWarehousesWidth: number;
 	warehousesUrl = 'api/warehouses/';
 	private handleError: HandleError;
 
@@ -31,7 +33,7 @@ export class WarehousesService {
 		private http: HttpClient,
 		httpErrorHandler: HttpErrorHandler
 	) {
-		this.handleError = httpErrorHandler.createHandleError('SubjectsService_ERROR');
+		this.handleError = httpErrorHandler.createHandleError('WarehousesService_ERROR');
 		this.arrayLengthSubject = new BehaviorSubject<number>(this.warehousesAllLength);
 		this.arrLength = this.arrayLengthSubject.asObservable();
 	}
@@ -58,6 +60,10 @@ export class WarehousesService {
 				tap(res => {
 					this.warehousesAllLength = res.length;
 					this.arrayLengthSubject.next(this.warehousesAllLength);
+					this.sumWarehousesLength = res.filter(subject => subject.warehouseLength).
+						reduce((sum, current) => sum + current.warehouseLength, 0);
+					this.sumWarehousesWidth = res.filter(subject => subject.warehouseWidth).
+						reduce((sum, current) => sum + current.warehouseWidth, 0);
 				}),
 				map(warehouses => warehouses.
 					filter((warehouse, index, arr) => {

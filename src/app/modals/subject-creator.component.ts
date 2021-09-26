@@ -1,7 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {Subject} from '../models/subject.model';
+import {ValueMeter} from '../models/value-meter.model';
 import {SubjectsService} from '../services/subjects.service';
 import {AuthService} from '../services/auth.service';
 
@@ -16,10 +18,24 @@ export class SubjectCreatorDialog {
 	subject: Subject | undefined; // the subject currently being edited
 	subjects: Subject[] = [];
 
-	constructor(private subjectService: SubjectsService,
+	selectedValue: number;
+	selectedMeter: number;
+
+	valueMeters: ValueMeter[] = [
+		{value: 1, viewValue: 1},
+		{value: 2, viewValue: 2},
+		{value: 3, viewValue: 3},
+		{value: 4, viewValue: 4},
+		{value: 5, viewValue: 5}
+	];
+
+	constructor(
+		private _snackBar: MatSnackBar,
+		private subjectService: SubjectsService,
 		private authService: AuthService,
 		public dialogRef: MatDialogRef<SubjectCreatorDialog>,
-		@Inject(MAT_DIALOG_DATA) public data: Subject) {}
+		@Inject(MAT_DIALOG_DATA) public data: Subject
+	) {}
 
 	onCancelClick(): void {
 		this.dialogRef.close();
@@ -38,6 +54,7 @@ export class SubjectCreatorDialog {
 				this.dialogRef.close();
 			}
 		}
+		this.openSnackBar('Sikeres mentés!', 'Bezár');
 	}
 
 	edit(id: number,
@@ -80,6 +97,12 @@ export class SubjectCreatorDialog {
 		this.subjectService
 			.addSubject(newSubject)
 			.subscribe(subject => this.subjects.push(subject));
+	}
+
+	openSnackBar(message: string, action: string) {
+		this._snackBar.open(message, action, {
+			duration: 3000
+		});
 	}
 
 }

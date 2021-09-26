@@ -12,7 +12,7 @@ export class InMemoryDataService implements InMemoryDbService {
 			{
 				id: 1,
 				subjectName: 'Dió palló',
-				subjectLength: 18,
+				subjectLength: 5,
 				subjectWidth: 3,
 				subjectCreationDate: new Date(2020, 0, 1, 0, 30),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
@@ -20,7 +20,7 @@ export class InMemoryDataService implements InMemoryDbService {
 			{
 				id: 2,
 				subjectName: 'Fenyő palló',
-				subjectLength: 20,
+				subjectLength: 3,
 				subjectWidth: 3,
 				subjectCreationDate: new Date(2020, 2, 11, 3, 30),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
@@ -28,15 +28,15 @@ export class InMemoryDataService implements InMemoryDbService {
 			{
 				id: 3,
 				subjectName: 'Tölgy palló',
-				subjectLength: 23,
-				subjectWidth: 3,
+				subjectLength: 2,
+				subjectWidth: 1,
 				subjectCreationDate: new Date(2019, 1, 10, 2, 10),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
 			},
 			{
 				id: 4,
 				subjectName: 'Cseresznye palló',
-				subjectLength: 13,
+				subjectLength: 3,
 				subjectWidth: 3,
 				subjectCreationDate: new Date(2019, 4, 2, 8, 50),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
@@ -44,7 +44,7 @@ export class InMemoryDataService implements InMemoryDbService {
 			{
 				id: 5,
 				subjectName: 'Jávor palló',
-				subjectLength: 29,
+				subjectLength: 2,
 				subjectWidth: 3,
 				subjectCreationDate: new Date(2018, 4, 2, 9, 55),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
@@ -52,7 +52,7 @@ export class InMemoryDataService implements InMemoryDbService {
 			{
 				id: 6,
 				subjectName: 'Jegenye palló',
-				subjectLength: 28,
+				subjectLength: 4,
 				subjectWidth: 3,
 				subjectCreationDate: new Date(2018, 11, 3, 6, 35),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
@@ -60,7 +60,7 @@ export class InMemoryDataService implements InMemoryDbService {
 			{
 				id: 7,
 				subjectName: 'Kőris palló',
-				subjectLength: 21,
+				subjectLength: 4,
 				subjectWidth: 3,
 				subjectCreationDate: new Date(2017, 3, 2, 7, 30),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
@@ -68,7 +68,7 @@ export class InMemoryDataService implements InMemoryDbService {
 			{
 				id: 8,
 				subjectName: 'Juhar palló',
-				subjectLength: 12,
+				subjectLength: 5,
 				subjectWidth: 3,
 				subjectCreationDate: new Date(2020, 9, 13, 12, 38),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
@@ -76,39 +76,39 @@ export class InMemoryDataService implements InMemoryDbService {
 			{
 				id: 9,
 				subjectName: 'Mahagóni palló',
-				subjectLength: 10,
-				subjectWidth: 3,
+				subjectLength: 5,
+				subjectWidth: 2,
 				subjectCreationDate: new Date(2021, 3, 3, 3, 33),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
 			},
 			{
 				id: 10,
 				subjectName: 'Ében palló',
-				subjectLength: 24,
-				subjectWidth: 3,
+				subjectLength: 3,
+				subjectWidth: 1,
 				subjectCreationDate: new Date(2021, 7, 2, 9, 50),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
 			},
 			{
 				id: 11,
 				subjectName: 'Vasfa palló',
-				subjectLength: 19,
-				subjectWidth: 3,
+				subjectLength: 5,
+				subjectWidth: 2,
 				subjectCreationDate: new Date(2017, 3, 2, 2, 32),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
 			},
 			{
 				id: 12,
 				subjectName: 'Vörösfenyő palló',
-				subjectLength: 30,
-				subjectWidth: 3,
+				subjectLength: 3,
+				subjectWidth: 1,
 				subjectCreationDate: new Date(2020, 9, 12, 5, 24),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
 			},
 			{
 				id: 13,
 				subjectName: 'Hárs palló',
-				subjectLength: 14,
+				subjectLength: 4,
 				subjectWidth: 3,
 				subjectCreationDate: new Date(2021, 11, 3, 9, 38),
 				subjectButton: 'GOMB HELYETT NYOMHATÓ A SOR'
@@ -119,22 +119,22 @@ export class InMemoryDataService implements InMemoryDbService {
 			{
 				id: 1,
 				warehouseAddress: '1142, Bp. Üllői út 22.',
-				warehouseLength: 1180,
-				warehouseWidth: 350,
+				warehouseLength: 4,
+				warehouseWidth: 5,
 				warehouseButton: 'GOMB HELYETT NYOMHATÓ A SOR'
 			},
 			{
 				id: 2,
 				warehouseAddress: '1135, Bp. Reitter F. utca 14.',
-				warehouseLength: 2220,
-				warehouseWidth: 380,
+				warehouseLength: 3,
+				warehouseWidth: 3,
 				warehouseButton: 'GOMB HELYETT NYOMHATÓ A SOR'
 			},
 			{
 				id: 3,
 				warehouseAddress: '1130, Bp. Kámfor utca 30.',
-				warehouseLength: 2300,
-				warehouseWidth: 330,
+				warehouseLength: 5,
+				warehouseWidth: 3,
 				warehouseButton: 'GOMB HELYETT NYOMHATÓ A SOR'
 			}
 		];

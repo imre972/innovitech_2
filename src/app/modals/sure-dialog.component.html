@@ -1,7 +1,7 @@
 <div mat-dialog-content class="mat-typography">
-    <p>Biztosan törölni akarja a {{ data.subjectName }} nevű elemet?</p>
+    <p>Biztosan törölni akarja a {{ dialogText }} elemet?</p>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Nem</button>
-    <button mat-button (click)='deleteSub()' cdkFocusInitial>Igen</button>
+    <button mat-button (click)="deleteSW()" cdkFocusInitial>Igen</button>
 </div>
