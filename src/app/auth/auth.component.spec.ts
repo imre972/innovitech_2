@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { AuthComponent } from './auth.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {FormsModule} from '@angular/forms'
+import {ReactiveFormsModule} from '@angular/forms';
+import {AuthComponent} from './auth.component';
 
 describe('AuthComponent', () => {
   let component: AuthComponent;
@@ -8,7 +10,12 @@ describe('AuthComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthComponent ]
+      declarations: [AuthComponent],
+      imports: [
+        RouterTestingModule,
+        ReactiveFormsModule,
+        FormsModule
+      ]
     })
     .compileComponents();
   }));
